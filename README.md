@@ -61,45 +61,36 @@ Paste the result directly into ChatGPT, Claude, AnyNewLLM, etc. to give the mode
 | `--ignore-regex "<arr>"`   | JSON string[] | Extra regex patterns to skip         |
 | `--disable-default-ignore` | boolean       | Disable the built-in ignore list     |
 
-Examples:
-```bash
-# Skip node_modules and *.log files
-```markdown
-contexo  --ignore '["node_modules"]' --ignore-regex '["\\.log$"]'
-```
-```
-Output is printed to `stdout`; redirect or pipe as you wish.
-
 
 ## Installation (pre-built binaries)
 
 Download the binary for your platform from the latest GitHub release and make it executable:
 
-### Linux x86-64 (glibc)
+### Linux x86-64
 
 ```bash
-sudo curl -L "https://github.com/kleber/contexo/releases/latest/download/contexo-bun-linux-x64" -o /usr/local/bin/contexo
+sudo curl -L -H "Accept: application/octet-stream" "https://github.com/kelvinauta/contexo/releases/download/0.1/contexo-bun-linux-x64" -o /usr/local/bin/contexo
 sudo chmod +x /usr/local/bin/contexo
 ```
 
 ### Linux x86-64 (musl/Alpine)
 
 ```bash
-sudo curl -L "https://github.com/kleber/contexo/releases/latest/download/contexo-bun-linux-x64-musl" -o /usr/local/bin/contexo
+sudo curl -L -H "Accept: application/octet-stream" "https://github.com/kelvinauta/contexo/releases/download/0.1/contexo-bun-linux-x64-musl" -o /usr/local/bin/contexo
 sudo chmod +x /usr/local/bin/contexo
 ```
 
 ### macOS (Apple Silicon)
 
 ```bash
-sudo curl -L "https://github.com/kleber/contexo/releases/latest/download/contexo-bun-darwin-arm64" -o /usr/local/bin/contexo
+sudo curl -L -H "Accept: application/octet-stream" "https://github.com/kelvinauta/contexo/releases/download/0.1/contexo-bun-darwin-arm64" -o /usr/local/bin/contexo
 sudo chmod +x /usr/local/bin/contexo
 ```
 
 ### Windows x86-64 (PowerShell)
-
+Invoke-WebRequest -Uri "https://github.com/kelvinauta/contexo/releases/download/0.1/contexo-bun-windows-x64.exe" -OutFile "contexo.exe"
 ```powershell
-Invoke-WebRequest -Uri "https://github.com/kleber/contexo/releases/latest/download/contexo-bun-windows-x64.exe" -OutFile "contexo.exe"
+Invoke-WebRequest -Uri "https://github.com/kelvinauta/contexo/releases/download/0.1/contexo-bun-windows-x64.exe" -OutFile "contexo.exe"
 # Move contexo.exe to a directory in your %PATH%
 ```
 
@@ -136,7 +127,7 @@ For other targets (ARM, Intel macOS, etc.), pick the corresponding file name fro
 
 
 # TODO:
-
+(If this repo gains some interest, I will improve it)
 ## read-project:
     - flag "--find": use only specific files matching a given regex
     - flag "--limit-token": set a token limit per file
