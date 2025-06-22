@@ -143,6 +143,10 @@ For other targets (ARM, Intel macOS, etc.), pick the corresponding file name fro
     - flag "--token-count": output the total token count for the entire stdout
     - flag "--tree-sitter": generate output using only TreeSitter to reduce token usage
 
+# Nota:
+
+Ironically, this project is Free VibeCoding, made by a human (for now asdjkahalksdjh)
+
 ## License
 
 MIT

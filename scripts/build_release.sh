@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
 ENTRY=./src/index.js
-OUTDIR=dist
+OUTDIR=.dist
 mkdir -p "$OUTDIR"
-
 TARGETS=(
   bun-linux-x64            # Linux x86_64 glibc
   bun-linux-x64-musl       # Linux x86_64 musl (Alpine)
@@ -13,10 +11,8 @@ TARGETS=(
   bun-darwin-x64           # macOS Intel
   bun-darwin-arm64         # macOS Apple Silicon
   bun-windows-x64          # Windows x86_64
-  bun-windows-arm64        # Windows arm64
 )
-
-echo "Building Contexo binaries into $OUTDIR …"
+echo "Building ConteXo binaries into $OUTDIR …"
 for TARGET in "${TARGETS[@]}"; do
   BASENAME="contexo-${TARGET}"
   # add .exe extension for Windows targets
@@ -31,4 +27,4 @@ for TARGET in "${TARGETS[@]}"; do
 
 done
 
-echo "All binaries are available in $OUTDIR"
+echo "AAAll binaries are available in $OUTDIR"
