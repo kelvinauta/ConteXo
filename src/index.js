@@ -28,6 +28,5 @@ class Contexo {
 const contexo = new Contexo();
 const output = await contexo.ContexoProject();
 
-console.clear()
 process.stdout.write(output+"\n"); // output
 process.exit();

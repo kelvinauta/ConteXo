@@ -35,8 +35,8 @@ try {
     values.ignore_regex = values.ignore_regex ? JSON.parse(values.ignore_regex) : [];
 } catch (error) {
     console.error("Could not parse correctly");
-    console.error(`Example of expected format: --ignore "['node_modules', 'package.json']"`);
-    console.error(`Example of expected format: --ignore-regex "['\\.ignore$']"`);
+    console.error(`Example of expected format  --ignore '["node_modules", "package.json"]'`);
+    console.error(`Example of expected format  --ignore-regex '["\\.ignore$"]'`);
     process.exit(1);
 }
 export default { values };
