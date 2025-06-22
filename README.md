@@ -58,6 +58,16 @@ bun run ./src/index.ts --ignore "['node_modules']" --ignore-regex "['\\.log$']"
 
 Output is printed to `stdout`; redirect or pipe as you wish.
 
+# TODO:
+
+## read-project:
+    - flag "--find": use only specific files matching a given regex
+    - flag "--limit-token": set a token limit per file
+    - flag "--token-count": output the total token count for the entire stdout
+    - flag "--tree-sitter": generate output using only TreeSitter to reduce token usage
+
+
+
 ## License
 
 MIT
