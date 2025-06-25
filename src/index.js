@@ -11,7 +11,8 @@ class Contexo {
         return await read_project.run();
     }
     _config() {
-        const { path, ignore, ignore_regex, disable_default_ignore, find } = Cli.values;
+        const { path, ignore, ignore_regex, disable_default_ignore, find, token_count } =
+            Cli.values;
         const config = Contexo.default_config;
         if (disable_default_ignore) {
             config.ignore = [];
@@ -21,6 +22,7 @@ class Contexo {
         if (ignore_regex?.length) config.ignore_regex = [...config.ignore_regex, ...ignore_regex];
         if (path) config.path = path;
         if (find) config.find = find;
+        if (token_count) config.token_count = token_count;
         return config;
     }
 }
@@ -28,5 +30,5 @@ class Contexo {
 const contexo = new Contexo();
 const output = await contexo.ContexoProject();
 
-process.stdout.write(output+"\n"); // output
+process.stdout.write(output + "\n"); // output
 process.exit();

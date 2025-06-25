@@ -12,19 +12,58 @@ class ReadProject {
         this.ignore_regex = this.config.ignore_regex.map((reg) => new RegExp(reg));
         this.limit_size = this.config.limit;
         this.ignore_files = [];
+        this.only_token_count = this.config.token_count;
     }
     async run() {
         let { files, ignore_files } = await this._recursive_scan(this.path);
         files = await this._read_files(files);
         files = this._builder_content(files);
         const contexo = this._create_contexo(files, ignore_files);
+        if (this.only_token_count) return await this.token_count(contexo);
         return contexo;
     }
 
+    async token_count(text) {
+        const { encoding_for_model } = await import("tiktoken"); // dynamic import keeps bundle smaller
+        // Price in USD per 1M input tokens
+        const PRICING_TABLE = [
+            { model: "o3", price: 2 },
+            { model: "gpt-4.1", price: 2 },
+            { model: "o4-mini", price: 1.1 },
+            { model: "gpt-4.1-mini", price: 0.4 },
+            { model: "gpt-4.1-nano", price: 0.1 },
+        ];
+        const results = [];
+
+        for (const { model, price } of PRICING_TABLE) {
+            let enc;
+            let message = "";
+            let default_model = "cl100k_base";
+            try {
+                enc = encoding_for_model(model);
+            } catch (e) {
+                // Fallback to a generic tokenizer if the specific model is not supported
+                enc = encoding_for_model(default_model);
+                message += `Error usign model ${model}, encoding fail or not found, fallback to a generic tokenizer ${default_model}\n`;
+            }
+            const tokens = enc.encode(text).length;
+            enc.free();
+
+            const cost = (tokens / 1_000_000) * price;
+            results.push({
+                model,
+                tokens,
+                pricing: cost,
+                message: `${model}: ${tokens} ≈ ${cost.toFixed(6)} $USD (input token)`,
+            });
+        }
+
+        return results.map(({ message }) => message).join("\n");
+    }
     _create_contexo(files, ignore_files) {
-        let header = ""
+        let header = "";
         header += `PROJECT: ${this.input_path}\n`;
-        header += `CWD: ${process.cwd()}`
+        header += `CWD: ${process.cwd()}`;
         const body = files.map(({ content }) => content).join("\n\n");
         const footer = `these paths exist but their reading has been skipped:\n${ignore_files.join("\n")}`;
         const br = "\n\n";

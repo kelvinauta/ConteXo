@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "fs-extra": "^11.3.0",
-    "isbinaryfile": "^5.0.4"
+    "isbinaryfile": "^5.0.4",
+    "tiktoken": "^1.0.21"
   }
 }
