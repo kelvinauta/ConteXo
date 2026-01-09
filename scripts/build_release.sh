@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ENTRY=./src/index.js
-OUTDIR=.dist
+OUTDIR=/tmp/.dist
 mkdir -p "$OUTDIR"
 TARGETS=(
   bun-linux-x64            # Linux x86_64 glibc
